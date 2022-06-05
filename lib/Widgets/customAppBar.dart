@@ -1,6 +1,6 @@
-import 'package:e_shop/Config/config.dart';
-import 'package:e_shop/Store/cart.dart';
-import 'package:e_shop/Counters/cartitemcounter.dart';
+import 'package:pet_shop/Config/config.dart';
+import 'package:pet_shop/Store/cart.dart';
+import 'package:pet_shop/Counters/cartitemcounter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

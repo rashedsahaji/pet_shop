@@ -1,12 +1,12 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_shop/Address/address.dart';
-import 'package:e_shop/Config/config.dart';
-import 'package:e_shop/Store/storehome.dart';
-import 'package:e_shop/Widgets/loadingWidget.dart';
-import 'package:e_shop/Widgets/orderCard.dart';
-import 'package:e_shop/Models/address.dart';
-import 'package:e_shop/main.dart';
+import 'package:pet_shop/Address/address.dart';
+import 'package:pet_shop/Config/config.dart';
+import 'package:pet_shop/Store/storehome.dart';
+import 'package:pet_shop/Widgets/loadingWidget.dart';
+import 'package:pet_shop/Widgets/orderCard.dart';
+import 'package:pet_shop/Models/address.dart';
+import 'package:pet_shop/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';

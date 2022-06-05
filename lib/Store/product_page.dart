@@ -1,8 +1,8 @@
-import 'package:e_shop/Widgets/customAppBar.dart';
-import 'package:e_shop/Widgets/myDrawer.dart';
-import 'package:e_shop/Models/item.dart';
+import 'package:pet_shop/Widgets/customAppBar.dart';
+import 'package:pet_shop/Widgets/myDrawer.dart';
+import 'package:pet_shop/Models/item.dart';
 import 'package:flutter/material.dart';
-import 'package:e_shop/Store/storehome.dart';
+import 'package:pet_shop/Store/storehome.dart';
 
 
 class ProductPage extends StatefulWidget 
