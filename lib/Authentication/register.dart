@@ -27,7 +27,7 @@ class _RegisterState extends State<Register>
   final TextEditingController _cPasswordTextEditingController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String userImageUrl = "";
-  File _imageFile;
+  late File _imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class _RegisterState extends State<Register>
 
   Future<void> _selectAndPickImage() async
   {
-    _imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    _imageFile = (await ImagePicker.pickImage(source: ImageSource.gallery)) as File;
   }
 
 
@@ -181,7 +181,7 @@ class _RegisterState extends State<Register>
   FirebaseAuth _auth = FirebaseAuth.instance;
   void _registerUser() async
   {
-    FirebaseUser firebaseUser;
+    User? firebaseUser;
 
     await _auth.createUserWithEmailAndPassword
       (
@@ -202,7 +202,7 @@ class _RegisterState extends State<Register>
 
     if(firebaseUser != null)
     {
-      saveUserInfoToFireStore(firebaseUser).then((value){
+      saveUserInfoToFireStore(firebaseUser!).then((value){
         Navigator.pop(context);
         Route route = MaterialPageRoute(builder: (c) => StoreHome());
         Navigator.pushReplacement(context, route);
@@ -211,9 +211,9 @@ class _RegisterState extends State<Register>
   }
 
 
-  Future saveUserInfoToFireStore(FirebaseUser fUser) async
+  Future saveUserInfoToFireStore(User fUser) async
   {
-    Firestore.instance.collection("users").document(fUser.uid).setData({
+    FirebaseFirestore.instance.collection("users").doc(fUser.uid).update({
       "uid": fUser.uid,
       "email": fUser.email,
       "name": _nameTextEditingController.text.trim(),
@@ -222,7 +222,7 @@ class _RegisterState extends State<Register>
     });
     
     await EcommerceApp.sharedPreferences.setString("uid", fUser.uid);
-    await EcommerceApp.sharedPreferences.setString(EcommerceApp.userEmail, fUser.email);
+    await EcommerceApp.sharedPreferences.setString(EcommerceApp.userEmail, fUser.email ?? "");
     await EcommerceApp.sharedPreferences.setString(EcommerceApp.userName, _nameTextEditingController.text);
     await EcommerceApp.sharedPreferences.setString(EcommerceApp.userAvatarUrl, userImageUrl);
     await EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, ["garbageValue"]);

@@ -7,7 +7,7 @@ import 'package:pet_shop/Store/storehome.dart';
 
 class ProductPage extends StatefulWidget 
 {
-  final ItemModel itemModel;
+  final ItemModel? itemModel;
   ProductPage({this.itemModel});
   
   @override
@@ -40,7 +40,7 @@ class _ProductPageState extends State<ProductPage>
                   Stack(
                     children: [
                       Center(
-                        child: Image.network(widget.itemModel.thumbnailUrl),
+                        child: Image.network(widget.itemModel?.thumbnailUrl ?? ""),
                       ),
                       Container(
                         color: Colors.grey[300],
@@ -59,7 +59,7 @@ class _ProductPageState extends State<ProductPage>
                         children: [
                           
                           Text(
-                            widget.itemModel.title,
+                            widget.itemModel?.title ?? "",
                             style: boldTextStyle,
                           ),
                           SizedBox(
@@ -67,14 +67,14 @@ class _ProductPageState extends State<ProductPage>
                           ),
 
                           Text(
-                            widget.itemModel.longDescription,
+                            widget.itemModel?.longDescription ?? "",
                           ),
                           SizedBox(
                             height: 10.0,
                           ),
 
                           Text(
-                            "€ " + widget.itemModel.price.toString(),
+                            "€ " + (widget.itemModel?.price.toString() ?? ""),
                             style: boldTextStyle,
                           ),
                           SizedBox(
@@ -88,7 +88,7 @@ class _ProductPageState extends State<ProductPage>
                     padding: EdgeInsets.only(top: 8.0),
                     child: Center(
                       child: InkWell(
-                        onTap: ()=> checkItemInCart(widget.itemModel.shortInfo, context),
+                        onTap: ()=> checkItemInCart(widget.itemModel?.shortInfo ?? "", context),
                         child: Container(
                           decoration: new BoxDecoration(
                             gradient: new LinearGradient(

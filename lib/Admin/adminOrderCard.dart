@@ -10,11 +10,11 @@ import '../Store/storehome.dart';
 int counter=0;
 class AdminOrderCard extends StatelessWidget
 {
-  final int itemCount;
-  final List<DocumentSnapshot> data;
-  final String orderID;
-  final String addressID;
-  final String orderBy;
+  final int? itemCount;
+  final List<DocumentSnapshot>? data;
+  final String? orderID;
+  final String? addressID;
+  final String? orderBy;
 
   AdminOrderCard({Key? key, this.itemCount, this.data, this.orderID, this.addressID, this.orderBy,}) : super(key: key);
 
@@ -24,7 +24,7 @@ class AdminOrderCard extends StatelessWidget
     return  InkWell(
       onTap: ()
       {
-        Route route;
+        late Route route;
         if(counter == 0)
         {
           counter = counter + 1;

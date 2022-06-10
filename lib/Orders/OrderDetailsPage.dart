@@ -15,14 +15,14 @@ import 'package:intl/intl.dart';
 String getOrderId="";
 class OrderDetails extends StatelessWidget
 {
-  final String orderID;
+  final String? orderID;
 
-  OrderDetails({Key key, this.orderID,}) : super(key: key);
+  OrderDetails({Key? key, this.orderID,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) 
   {
-    getOrderId = orderID;
+    getOrderId = orderID ?? "";
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(

@@ -12,7 +12,7 @@ import '../Widgets/myDrawer.dart';
 import '../Widgets/searchBox.dart';
 import '../Models/item.dart';
 
-double width;
+double? width;
 
 class StoreHome extends StatefulWidget {
   @override
@@ -87,7 +87,7 @@ class _StoreHomeState extends State<StoreHome> {
           slivers: [
             SliverPersistentHeader(pinned: true, delegate: SearchBoxDelegate()),
             StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection("items").limit(15).orderBy("publishedDate", descending: true).snapshots(),
+              stream: FirebaseFirestore.instance.collection("items").limit(15).orderBy("publishedDate", descending: true).snapshots(),
               builder: (context, dataSnapshot)
               {
                 return !dataSnapshot.hasData

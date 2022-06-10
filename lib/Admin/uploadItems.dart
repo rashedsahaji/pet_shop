@@ -23,7 +23,7 @@ class UploadPage extends StatefulWidget
 class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMixin<UploadPage>
 {
   bool get wantKeepAlive => true;
-  File file;
+  late File file;
   TextEditingController _descriptionTextEditingController = TextEditingController();
   TextEditingController _priceTextEditingController = TextEditingController();
   TextEditingController _titleTextEditingController = TextEditingController();
@@ -139,7 +139,7 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
   capturePhotoWithCamera() async
   {
     Navigator.pop(context);
-    File imageFile = await ImagePicker.pickImage(source: ImageSource.camera, maxHeight: 680.0, maxWidth: 970.0);
+    File imageFile = (await ImagePicker.pickImage(source: ImageSource.camera, maxHeight: 680.0, maxWidth: 970.0)) as File;
 
     setState(() {
       file = imageFile;
@@ -149,7 +149,7 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
   pickPhotoFromGallery() async
   {
     Navigator.pop(context);
-    File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery,);
+    File imageFile = (await ImagePicker.pickImage(source: ImageSource.gallery,)) as File;
 
     setState(() {
       file = imageFile;

@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ItemModel {
-  String title;
-  String shortInfo;
-  Timestamp publishedDate;
-  String thumbnailUrl;
-  String longDescription;
-  String status;
-  int price;
+  String? title;
+  String? shortInfo;
+  Timestamp? publishedDate;
+  String? thumbnailUrl;
+  String? longDescription;
+  String? status;
+  int? price;
 
   ItemModel(
       {this.title,
@@ -44,7 +44,7 @@ class ItemModel {
 }
 
 class PublishedDate {
-  String date;
+  String? date;
 
   PublishedDate({this.date});
 

@@ -35,14 +35,14 @@ class MyDrawer extends StatelessWidget {
                     width: 160.0,
                     child: CircleAvatar(
                       backgroundImage: NetworkImage(
-                        EcommerceApp.sharedPreferences.getString(EcommerceApp.userAvatarUrl),
+                        EcommerceApp.sharedPreferences.getString(EcommerceApp.userAvatarUrl) ?? "",
                       ),
                     ),
                   ),
                 ),
                 SizedBox(height: 10.0,),
                 Text(
-                  EcommerceApp.sharedPreferences.getString(EcommerceApp.userName),
+                  EcommerceApp.sharedPreferences.getString(EcommerceApp.userName) ?? "",
                   style: TextStyle(color: Colors.white, fontSize: 35.0, fontFamily: "Signatra"),
                 ),
               ],

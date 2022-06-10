@@ -10,10 +10,10 @@ import 'package:provider/provider.dart';
 
 class PaymentPage extends StatefulWidget
 {
-  final String addressId;
-  final double totalAmount;
+  final String? addressId;
+  final double? totalAmount;
 
-  PaymentPage({Key key, this.addressId, this.totalAmount,}) : super(key: key);
+  const PaymentPage({Key? key, this.addressId, this.totalAmount,}) : super(key: key);
 
   @override
   _PaymentPageState createState() => _PaymentPageState();
@@ -88,7 +88,7 @@ class _PaymentPageState extends State<PaymentPage> {
   emptyCartNow()
   {
     EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, ["garbageValue"]);
-    List tempList = EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList);
+    List<String>? tempList = EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList);
 
     Firestore.instance.collection("users")
         .document(EcommerceApp.sharedPreferences.getString(EcommerceApp.userUID))
@@ -96,7 +96,7 @@ class _PaymentPageState extends State<PaymentPage> {
       EcommerceApp.userCartList: tempList,
     }).then((value)
     {
-      EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, tempList);
+      EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, tempList!);
       Provider.of<CartItemCounter>(context, listen: false).displayResult();
     });
 
@@ -119,7 +119,7 @@ class _PaymentPageState extends State<PaymentPage> {
   {
     await EcommerceApp.firestore
         .collection(EcommerceApp.collectionOrders)
-        .document(EcommerceApp.sharedPreferences.getString(EcommerceApp.userUID) + data['orderTime'])
+        .document(EcommerceApp.sharedPreferences.getString(EcommerceApp.userUID)! + data['orderTime'])
         .setData(data);
   }
 }

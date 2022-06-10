@@ -20,7 +20,7 @@ class SearchProduct extends StatefulWidget {
 
 class _SearchProductState extends State<SearchProduct>
 {
-  Future<QuerySnapshot> docList;
+  late Future<QuerySnapshot> docList;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class _SearchProductState extends State<SearchProduct>
 
   Future startSearching(String query) async
   {
-    docList = Firestore.instance.collection("items")
+    docList = FirebaseFirestore.instance.collection("items")
         .where("shortInfo", isGreaterThanOrEqualTo: query)
         .getDocuments();
   }

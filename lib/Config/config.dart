@@ -7,9 +7,9 @@ class EcommerceApp
    static const String appName = 'pet_shop';
 
    static late SharedPreferences sharedPreferences;
-   static late FirebaseUser user;
+   static late User user;
    static late FirebaseAuth auth;
-   static late Firestore firestore ;
+   static late FirebaseFirestore firestore ;
 
    static String collectionUser = "users";
    static String collectionOrders = "orders";

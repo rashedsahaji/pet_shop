@@ -7,18 +7,18 @@ import '../Store/storehome.dart';
 int counter = 0;
 class OrderCard extends StatelessWidget
 {
-  final int itemCount;
-  final List<DocumentSnapshot> data;
-  final String orderID;
+  final int? itemCount;
+  final List<DocumentSnapshot>? data;
+  final String? orderID;
 
-  OrderCard({Key key, this.itemCount, this.data, this.orderID,}) : super(key: key);
+  OrderCard({Key? key, this.itemCount, this.data, this.orderID,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return  InkWell(
       onTap: ()
       {
-        Route route;
+        late Route route;
         if(counter == 0)
         {
           counter = counter + 1;
@@ -38,13 +38,13 @@ class OrderCard extends StatelessWidget
         ),
         padding: EdgeInsets.all(10.0),
         margin: EdgeInsets.all(10.0),
-        height: itemCount * 190.0,
+        height: (itemCount ?? 1) * 190.0,
         child: ListView.builder(
           itemCount: itemCount,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (c, index)
           {
-            ItemModel model = ItemModel.fromJson(data[index].data);
+            ItemModel model = ItemModel.fromJson(data?[index].data as Map<String, dynamic>);
             return sourceOrderInfo(model, context);
           },
         ),
@@ -56,7 +56,7 @@ class OrderCard extends StatelessWidget
 
 
 Widget sourceOrderInfo(ItemModel model, BuildContext context,
-    {Color background})
+    {Color? background})
 {
   width =  MediaQuery.of(context).size.width;
 
@@ -66,7 +66,7 @@ Widget sourceOrderInfo(ItemModel model, BuildContext context,
     width: width,
     child: Row(
       children: [
-        Image.network(model.thumbnailUrl, width: 180.0,),
+        Image.network(model.thumbnailUrl ?? "", width: 180.0,),
         SizedBox(width: 10.0,),
         Expanded(
           child: Column(
@@ -78,7 +78,7 @@ Widget sourceOrderInfo(ItemModel model, BuildContext context,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Text(model.title, style: TextStyle(color: Colors.black, fontSize: 14.0),),
+                      child: Text(model.title ?? "", style: TextStyle(color: Colors.black, fontSize: 14.0),),
                     ),
                   ],
                 ),
@@ -89,7 +89,7 @@ Widget sourceOrderInfo(ItemModel model, BuildContext context,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Text(model.shortInfo, style: TextStyle(color: Colors.black54, fontSize: 12.0),),
+                      child: Text(model.shortInfo ?? "", style: TextStyle(color: Colors.black54, fontSize: 12.0),),
                     ),
                   ],
                 ),

@@ -22,7 +22,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage>
 {
-  double totalAmount;
+  double? totalAmount;
 
   @override
   void initState() {
@@ -38,13 +38,13 @@ class _CartPageState extends State<CartPage>
       floatingActionButton: FloatingActionButton.extended(
         onPressed: ()
         {
-          if(EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList).length == 1)
+          if(EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList)?.length == 1)
           {
             Fluttertoast.showToast(msg: "your Cart is empty.");
           }
           else
           {
-            Route route = MaterialPageRoute(builder: (c) => Address(totalAmount: totalAmount));
+            Route route = MaterialPageRoute(builder: (c) => Address(totalAmount: totalAmount ?? 0));
             Navigator.pushReplacement(context, route);
           }
         },
@@ -90,21 +90,21 @@ class _CartPageState extends State<CartPage>
                             if(index == 0)
                             {
                               totalAmount = 0;
-                              totalAmount = model.price + totalAmount;
+                              totalAmount = (model.price ?? 0) + (totalAmount ?? 0);
                             }
                             else
                             {
-                              totalAmount = model.price + totalAmount;
+                              totalAmount = (model.price ?? 0) + (totalAmount ?? 0);
                             }
 
                             if(snapshot.data.documents.length - 1 == index)
                             {
                               WidgetsBinding.instance.addPostFrameCallback((t) {
-                                Provider.of<TotalAmount>(context, listen: false).display(totalAmount);
+                                Provider.of<TotalAmount>(context, listen: false).display(totalAmount ?? 0);
                               });
                             }
 
-                            return sourceInfo(model, context, removeCartFunction: () => removeItemFromUserCart(model.shortInfo));
+                            return sourceInfo(model, context, removeCartFunction: () => removeItemFromUserCart(model.shortInfo ?? ""));
                           },
 
                           childCount: snapshot.hasData ? snapshot.data.documents.length : 0,
@@ -139,7 +139,7 @@ class _CartPageState extends State<CartPage>
 
   removeItemFromUserCart(String shortInfoAsId)
   {
-    List tempCartList = EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList);
+    List tempCartList = EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList) as List<dynamic>;
     tempCartList.remove(shortInfoAsId);
 
     EcommerceApp.firestore.collection(EcommerceApp.collectionUser)
@@ -149,7 +149,7 @@ class _CartPageState extends State<CartPage>
     }).then((v){
       Fluttertoast.showToast(msg: "Item Removed Successfully.");
 
-      EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, tempCartList);
+      EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, tempCartList as List<String>);
 
       Provider.of<CartItemCounter>(context, listen: false).displayResult();
 

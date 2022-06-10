@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget
 {
-  final PreferredSizeWidget bottom;
+  final PreferredSizeWidget? bottom;
   MyAppBar({this.bottom});
 
 
@@ -61,7 +61,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget
                       builder: (context, counter, _)
                       {
                         return Text(
-                          (EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList).length-1).toString(),
+                          (EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList)?.length ?? 0-1).toString(),
                           style: TextStyle(color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.bold),
                         );
                       },

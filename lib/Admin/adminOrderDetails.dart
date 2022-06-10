@@ -14,15 +14,15 @@ import 'package:intl/intl.dart';
 String getOrderId="";
 class AdminOrderDetails extends StatelessWidget
 {
-  final String orderID;
-  final String orderBy;
-  final String addressID;
+  final String? orderID;
+  final String? orderBy;
+  final String? addressID;
 
-  AdminOrderDetails({Key key, this.orderID, this.orderBy, this.addressID,}) : super(key: key);
+  const AdminOrderDetails({Key? key, this.orderID, this.orderBy, this.addressID,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    getOrderId = orderID;
+    getOrderId = orderID ?? "";
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -33,10 +33,10 @@ class AdminOrderDetails extends StatelessWidget
                 .get(),
             builder: (c, snapshot)
             {
-              Map dataMap;
+              late Map dataMap;
               if(snapshot.hasData)
               {
-                dataMap = snapshot.data.data;
+                dataMap = snapshot.data?.data as Map;
               }
               return snapshot.hasData
                   ? Container(
@@ -76,8 +76,8 @@ class AdminOrderDetails extends StatelessWidget
                       {
                         return dataSnapshot.hasData
                             ? OrderCard(
-                          itemCount: dataSnapshot.data.documents.length,
-                          data: dataSnapshot.data.documents,
+                          itemCount: dataSnapshot.data?.documents.length,
+                          data: dataSnapshot.data?.documents,
                         )
                             : Center(child: circularProgress(),);
                       },
@@ -110,9 +110,9 @@ class AdminOrderDetails extends StatelessWidget
 }
 
 class AdminStatusBanner extends StatelessWidget {
-  final bool status;
+  final bool? status;
 
-  AdminStatusBanner({Key key, this.status}) : super(key: key);
+  AdminStatusBanner({Key? key, this.status}) : super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -120,8 +120,8 @@ class AdminStatusBanner extends StatelessWidget {
     String msg;
     IconData iconData;
 
-    status ? iconData = Icons.done : iconData = Icons.cancel;
-    status ? msg = "Successful" : msg = "UnSuccessful";
+    status == true ? iconData = Icons.done : iconData = Icons.cancel;
+    status == true ? msg = "Successful" : msg = "UnSuccessful";
 
     return Container(
       decoration: new BoxDecoration(
@@ -175,9 +175,9 @@ class AdminStatusBanner extends StatelessWidget {
 
 
 class AdminShippingDetails extends StatelessWidget {
-  final AddressModel model;
+  final AddressModel? model;
 
-  AdminShippingDetails({Key key, this.model}) : super(key: key);
+  AdminShippingDetails({Key? key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -205,42 +205,42 @@ class AdminShippingDetails extends StatelessWidget {
               TableRow(
                   children: [
                     KeyText(msg: "Name",),
-                    Text(model.name),
+                    Text(model?.name ?? ""),
                   ]
               ),
 
               TableRow(
                   children: [
                     KeyText(msg: "Phone Number",),
-                    Text(model.phoneNumber),
+                    Text(model?.phoneNumber ?? ""),
                   ]
               ),
 
               TableRow(
                   children: [
                     KeyText(msg: "Flat Number",),
-                    Text(model.flatNumber),
+                    Text(model?.flatNumber ?? ""),
                   ]
               ),
 
               TableRow(
                   children: [
                     KeyText(msg: "City",),
-                    Text(model.city),
+                    Text(model?.city ?? ""),
                   ]
               ),
 
               TableRow(
                   children: [
                     KeyText(msg: "State",),
-                    Text(model.state),
+                    Text(model?.state ?? ""),
                   ]
               ),
 
               TableRow(
                   children: [
                     KeyText(msg: "Pin Code",),
-                    Text(model.pincode),
+                    Text(model?.pincode ?? ""),
                   ]
               ),
 

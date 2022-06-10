@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class LoadingAlertDialog extends StatelessWidget
 {
-  final String message;
-  const LoadingAlertDialog({Key key, this.message}) : super(key: key);
+  final String? message;
+  const LoadingAlertDialog({Key? key, this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -19,7 +19,7 @@ class LoadingAlertDialog extends StatelessWidget
           SizedBox(
             height: 10,
           ),
-          Text(message),
+          Text(message ?? ""),
         ],
       ),
     );

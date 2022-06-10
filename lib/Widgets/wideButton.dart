@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 
 class WideButton extends StatelessWidget {
-  final String message;
-  final Function onPressed;
+  final String? message;
+  final VoidCallback? onPressed;
 
-  WideButton({Key key, this.message, this.onPressed,}) : super(key: key);
+  WideButton({Key? key, this.message, required this.onPressed,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class WideButton extends StatelessWidget {
             height: 50.0,
             child: Center(
               child: Text(
-                message,
+                message ?? "",
                 style: TextStyle(color: Colors.white),
               ),
             ),

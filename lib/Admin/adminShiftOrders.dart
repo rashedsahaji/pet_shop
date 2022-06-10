@@ -43,19 +43,19 @@ class _MyOrdersState extends State<AdminShiftOrders> {
           ],
         ),
         body: StreamBuilder<QuerySnapshot>(
-          stream: Firestore.instance
+          stream: FirebaseFirestore.instance
               .collection("orders")
               .snapshots(),
           builder: (c, snapshot)
           {
             return snapshot.hasData
                 ? ListView.builder(
-              itemCount: snapshot.data.documents.length,
+              itemCount: snapshot.data?.documents.length,
               itemBuilder: (c, index){
                 return FutureBuilder<QuerySnapshot>(
-                  future: Firestore.instance
+                  future: FirebaseFirestore.instance
                       .collection("items")
-                      .where("shortInfo", whereIn: snapshot.data.documents[index].data[EcommerceApp.productID])
+                      .where("shortInfo", whereIn: snapshot.data?.documents[index].data[EcommerceApp.productID])
                       .getDocuments(),
 
                   builder: (c, snap)
@@ -64,7 +64,7 @@ class _MyOrdersState extends State<AdminShiftOrders> {
                         ? AdminOrderCard(
                       itemCount: snap.data.documents.length,
                       data: snap.data.documents,
-                      orderID: snapshot.data.documents[index].documentID,
+                      orderID: snapshot.data?.documents[index].documentID,
                       orderBy: snapshot.data.documents[index].data["orderBy"],
                       addressID: snapshot.data.documents[index].data["addressID"],
                     )
